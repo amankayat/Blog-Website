@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block heading %}
+<p class=" mt-5 border p-1 text-center text-dark fs-1 fw-bold" >{{user.id}}. {{user.title}}</p>
+{% endblock heading %}
+{% block content %}
+<h2>{{user.subtitle}}</h2><br>
+<p>{{user.desc}}</p>
+<br>
+<div class="text-center mb-5">
+   
+    {% if request.user.is_authenticated %}
+    <a href="{% url 'profile' %}" class="btn btn-dark ">Back To Profile</a>
+    <a href="/" class="btn btn-dark ">Back To Home</a>
+    {% else %}
+    <a href="/" class="btn btn-dark ">Cancel</a>
+    {% endif %}
+</div>
+{% endblock content %}

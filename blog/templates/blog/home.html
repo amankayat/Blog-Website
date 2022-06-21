@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block heading %}
+<p class="text-center fw-bold">If you want to edit or adding post then please signup or login first.</p>
+<div style="float: right;" >
+    <a href="{% url 'signup' %}" class="btn btn-warning float-right">Signup</a>
+    <a href="{% url 'login' %}" class="btn btn-warning">Login</a>
+</div>
+
+<p class="   border p-1 text-center text-dark fs-1 fw-bold" >Latest Blogs</p>
+{% endblock heading %}
+
+{% block content %}
+{% for pst in posts %}
+
+<div class="jumbotron jumbotron-fluid jumbo-color border mb-5">
+    <div class="container p-5">
+        <h1 class="display-4 font-weight-bold">{{pst.title}}</h1>
+        <p class="lead">{{pst.subtitle}}</p>
+        <a href="{% url 'showblog' pst.id %}" class="btn btn-outline-primary">Read more</a>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock content %}

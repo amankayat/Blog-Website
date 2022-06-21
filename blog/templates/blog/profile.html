@@ -1,0 +1,68 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block heading %}
+    {% if messages %}
+    {% for message in messages %}
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Welcome {{full_name}} ! {{message}}</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+
+    {% endif %}
+
+{% endblock heading %}
+{% block ct %}
+
+    <div class="col-sm-3 mt-5" >
+
+        <h2 class="text-center fw-bold">Profile</h2>
+        <h3 class="text-center p-2">{{full_name}}</h3>
+        <p class="text-center">{{user.email}}</p>
+        <div class="text-center ">
+            <a href="{% url 'addpost' %}" class=" btn btn-dark">ADD POST</a>
+        </div>
+       
+    </div>
+    <div class="col-sm-9 mt-5">
+        <table class="table table-light table-striped-columns">
+           <thead>
+               <tr class="text-center">
+                <th scope="col">ID</th>
+                <th scope="col">Blogs</th>
+                <th scope="col">Action</th>
+                
+               </tr>
+              
+           </thead>
+           <tbody>
+
+            {% for pst in post %}
+            <tr>
+                <td scope="row" class="fw-bold">{{pst.id}}</td>
+                <td scope="row" class="text-center fw-bold"> <a href="{% url 'showblog' pst.id %}">{{pst.title}}</a>  </td>
+                <td class="text-center">
+                    <a href="{% url 'updateblog' pst.id %}" class="btn btn-warning m-1">Edit</a>
+                    <a href="{% url 'deleteblog' pst.id %}" class="btn btn-danger m-1">Delete</a>
+                      <!-- <form action="" method="post">
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form> -->
+                </td>
+
+                  
+                   
+                  
+               
+               
+              
+    
+            </tr>
+           
+            {% endfor %}
+           </tbody>
+          </table>
+    </div>
+
+
+{% endblock ct %}

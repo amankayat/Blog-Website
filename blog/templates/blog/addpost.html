@@ -1,0 +1,39 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block heading %}
+{% if messages %}
+{% for message in messages %}
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+{% endfor %}
+
+{% endif %}
+
+<p class=" mt-5 border p-1 text-center text-dark fs-1 fw-bold" >ADD BLOG</p>
+{% endblock heading %}
+
+{% block content %}
+<div  class="d-flex justify-content-center">
+    <form action="" method="POST" style="width: 500px; "  novalidate>
+        {% csrf_token %}
+        {% for fm in form %}
+       {{fm.label_tag}}{{fm}} {{fm.errors|striptags}}<br>
+        {% endfor %}
+       
+        <div class="d-flex justify-content-center ">
+            
+            <input type="submit" name="" id="" value="ADD POST" class="btn btn-primary  m-2">
+            <a href="{% url 'profile' %}" class="btn btn-dark m-2">Back</a>
+        </div>
+        {% if fm.non_field_errors %}
+        {% for error in fm.non_field_errors %}
+        <p class="alert alert-danger my-3">{{error}}</p>
+        {% endfor %}
+        {% endif %}
+    </form>
+</div>
+
+{% endblock content %}
