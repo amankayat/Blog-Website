@@ -1,4 +1,5 @@
 
+from ensurepip import version
 from pyexpat.errors import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -6,6 +7,7 @@ from django.contrib import messages
 from blog.forms import signupform,loginform,addpostform
 from .models import post
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.contrib.auth import authenticate,login,logout 
 # Create your views here.
 
@@ -47,7 +49,9 @@ def user_profile(requests):
         posts = post.objects.all()
         user = requests.user
         name = user.get_full_name()
-        return render(requests,'blog/profile.html',{'post':posts,'full_name':name,'user':user})
+        ip = requests.session.get('ip')
+        newcount = cache.get('count',version=user.pk)
+        return render(requests,'blog/profile.html',{'post':posts,'full_name':name,'user':user,'ip':ip,'newcount':newcount})
     else:
         return HttpResponseRedirect('/') 
 

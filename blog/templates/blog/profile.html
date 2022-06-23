@@ -20,6 +20,8 @@
         <h2 class="text-center fw-bold">Profile</h2>
         <h3 class="text-center p-2">{{full_name}}</h3>
         <p class="text-center">{{user.email}}</p>
+        <p class="text-center">IP Address: {{ip}}</p>
+        <h2 class="text-center ">Login Count: {{newcount}}</h2>
         <div class="text-center ">
             <a href="{% url 'addpost' %}" class=" btn btn-dark">ADD POST</a>
         </div>
